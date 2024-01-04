@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>Page Title</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+    crossorigin="anonymous"></script>
+    <script type="module" src="https://embedding.tableauusercontent.com/tableau.embedding.3.1.0.min.js"></script>
+
+</head>
+<style>
+  .tableau-center {
+    max-width: 80%;
+    max-height: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 2%;
+    margin-bottom: 2%;
+  }
+  .spC{
+    margin-top: 2%;
+    margin-bottom: 2%;
+  }
+
+  .centered-text {
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 10px;
+    border-radius: 5px;
+}
+</style>
+
+<body>
+  <!-- Navbar-->
+  <header class="header">
+    <nav class="navbar navbar-expand-lg fixed-top py-3" style="background-color: #F7FBFC ; opacity: 1;">
+      <div class="container">
+        <span class="navbar-brand">資料視覺化-第二組:臺中是否為犯罪之都？</span>
+        <button type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"
+          class="navbar-toggler navbar-toggler-right"><i class="fa fa-bars"></i></button>
+      </div>
+    </nav>
+  </header>
+
+  <main style="margin-top: 7%;">
+    <div class="decrease tableau-center" style="margin-top: 3%; margin-bottom: 2%;">
+
+      <h1 style="margin: 3%;margin-bottom: 3%;">前言</h1>
+      <div class="card">
+        <div class="card-body" style="font-size: x-large;">
+          我們組員有多位台中人，台中以來一直被稱為慶記之都、臺灣棒球隊，了解我們台中犯罪率，是否如網路上留言如此的糟糕，還是純粹因為著名地標金錢豹在市中心，所以才會有這種刻板印象。
+        </div>
+      </div>
+      <div>
+        <img style="max-width: 100%; margin-top: 2%; margin-bottom: 2%;" src="http://www.overkillsoftware.com/ovk-media/2019/08/PAYDAY2_6Years_3840x2160.jpg">
+      </div>
+
+      <div class="card" style="margin-bottom: 3%;">
+        <div class="card-body" style="font-size: x-large;">
+          <strong" style="font-size: larger;">犯罪的定義</strong>
+          <br>
+          刑事案件是指對於犯罪行為者進行司法程序審判後的處罰或制裁，其中包含傷害或可能對其他人的生命、身體、財產、安全造成危害的行為，例如：妨害自由、妨害名譽、暴力、詐欺、竊盜、殺人等等⋯
+        </div>
+      </div>
+
+      <div class="accordion" id="accordionExample">
+        <div class="accordion-item">
+          <h2 class="accordion-header">
+            <button style="font-size: x-large;" class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+              台灣犯罪案件分佈
+            </button>
+          </h2>
+          <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
+            <div class="accordion-body">
+              <div class="btn-group" role="group" aria-label="Basic outlined example">
+                <button type="button" class="btn btn-outline-primary" onclick="changeGraph('1',0,'https://public.tableau.com/views/-2_17042165224130/10?:language=en-US&:display_count=n&:origin=viz_share_link')">各年全台每十萬人犯罪率</button>
+                <button type="button" class="btn btn-outline-primary" onclick="changeGraph('1',1,'https://public.tableau.com/shared/8WFC69XMX?:display_count=n&:origin=viz_share_link')">各縣市每十萬人口犯罪案件數</button>
+                <button type="button" class="btn btn-outline-primary" onclick="changeGraph('1',2,'https://public.tableau.com/views/_17042570402760/sheet1?:language=en-US&:display_count=n&:origin=viz_share_link')">各縣市每十萬人口犯罪率</button>
+              </div>
+              <div class="spC">
+                <span id="sp1"></span>
+              </div>
+              <div id="graph1">
+                <tableau-viz id="tableauViz1" src='https://public.tableau.com/views/-2_17042165224130/10?:language=en-US&:display_count=n&:origin=viz_share_link'></tableau-viz> 
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <h2 class="accordion-header">
+            <button style="font-size: x-large;" class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+              台灣各縣市犯罪狀況
+            </button>
+          </h2>
+          <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+            <div class="accordion-body">
+      <div class="btn-group" role="group" aria-label="Basic outlined example">
+        <button type="button" class="btn btn-outline-primary" onclick="changeGraph('2',0,'https://public.tableau.com/shared/43G2NKGZP?:display_count=n&:origin=viz_share_link')">六都與非六都犯罪率</button>
+        <button type="button" class="btn btn-outline-primary" onclick="changeGraph('2',1,'https://public.tableau.com/views/100-111_17042136003260/100-111?:language=en-US&:display_count=n&:origin=viz_share_link')">六都縣市與非六都離島犯罪率比較</button>
+      </div>
+      <div class="spC">
+        <span id="sp2"></span>
+      </div>
+      <div>
+        <tableau-viz id="tableauViz2" src='https://public.tableau.com/shared/43G2NKGZP?:display_count=n&:origin=viz_share_link'></tableau-viz> 
+      </div>
+            </div>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <h2 class="accordion-header">
+            <button style="font-size: x-large;" class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+              台中小結
+            </button>
+          </h2>
+          <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+            <div class="accordion-body">
+              <img src="https://wallpapers.com/images/high/gta-5-franklin-in-varsity-jj3hr78sktzt8o9h.webp">
+          </div>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <h2 class="accordion-header">
+            <button style="font-size: x-large;" class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+              從經濟角度看待台灣犯罪問題
+            </button>
+          </h2>
+          <div id="collapseFour" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+            <div class="accordion-body">
+            <div class="btn-group" role="group" aria-label="Basic outlined example">
+              <button type="button" class="btn btn-outline-primary" onclick="changeGraph('3',0,'https://public.tableau.com/views/_17042196577700/sheet0?:language=en-US&:display_count=n&:origin=viz_share_link')">縣市所得收入與犯罪率比較</button>
+              <button type="button" class="btn btn-outline-primary" onclick="changeGraph('3',1,'https://public.tableau.com/views/_17042205718250/sheet0?:language=en-US&:display_count=n&:origin=viz_share_link')">失業率與犯罪率</button>
+            </div>
+            <div class="spC">
+              <span id="sp3"></span>
+            </div>
+            <tableau-viz id="tableauViz3" src="https://public.tableau.com/views/_17042196577700/sheet0?:language=en-US&:display_count=n&:origin=viz_share_link"></tableau-viz>
+          </div>
+          </div>
+        </div>
+      </div>
+      <br>
+      <h1 style="margin: 3%;margin-bottom: 3%;">ENDING</h1>
+      
+      <img src="https://assetsio.reedpopcdn.com/20130821_gta_5_grand_theft_auto_v.jpg?width=1200&height=1200&fit=bounds&quality=70&format=jpg&auto=webp">
+  </main>
+</body>
+<script>
+  var t1 = [
+    "",
+    "",
+    ""  
+  ]
+
+  var t2 = [
+    "",
+    ""
+  ]
+  var t3 = [
+    "",
+    ""
+  ]
+
+  function changeGraph(num,count,url) {
+    var el = "tableauViz" + num
+    var sp = "sp" + num
+    var topic = "tp" + num
+    var message
+    switch (num) {
+      case '1':
+        message = t1
+        break;
+      case '2':
+        message = t2
+        break
+      case '3':
+        message = t3
+        break
+      default:
+        break;
+    }
+    document.getElementById(sp).innerText = message[count]
+    document.getElementById(el).src = url
+  }
+</script>
+
+</html>
